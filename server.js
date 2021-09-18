@@ -9,7 +9,7 @@ app.listen({port: 4000}, () => {
 })
 
 app.get('/', (req, res) => {
-  res.send('holaaa')
+  res.send('App server now listening to port 4000')
 })
 
 app.get('/api/items', (req, res) => {
@@ -23,26 +23,29 @@ app.get('/api/items', (req, res) => {
   }
 
   let items = []
+  let categories = []
 
   axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${req.query.q}`)
     .then(function ({ data: { results, filters } }) {
 
-      const categoryValues = filters.find(filter => filter.id === 'category')?.values[0]
-      const categories = categoryValues?.path_from_root.map(path => path.name) || []
-      
-      for (let i = 0; i < 4; i++) {
-        items.push({
-          id: results[i].id,
-          title: results[i].title,
-          price: {
-            currency: results[i].currency_id,
-            amount: results[i].price.toString().split('.')[0],
-            decimals: results[i].price.toString().split('.')[1]
-          },
-          picture: results[i].thumbnail,
-          condition: results[i].condition,
-          free_shipping: results[i].shipping.free_shipping
-        })
+      if (results.length) {
+        const categoryValues = filters.find(filter => filter.id === 'category')?.values[0]
+        categories = categoryValues?.path_from_root.map(path => path.name) || []
+        
+        for (let i = 0; i < 4; i++) {
+          items.push({
+            id: results[i].id,
+            title: results[i].title,
+            price: {
+              currency: results[i].currency_id,
+              amount: results[i].price.toString().split('.')[0],
+              decimals: results[i].price.toString().split('.')[1]
+            },
+            picture: results[i].thumbnail,
+            condition: results[i].condition,
+            free_shipping: results[i].shipping.free_shipping
+          })
+        }
       }
 
       res.send({
@@ -56,12 +59,9 @@ app.get('/api/items', (req, res) => {
       })
     })
     .catch(function (error) {
-      res.status(500).send(error)
+      console.log(error.message)
+      res.status(500).send({ message: error.message })
     })
-    .then(function () {
-    // always executed
-    })
-
 })
 
 app.get('/api/items/:id', (req, res) => {
@@ -78,10 +78,6 @@ app.get('/api/items/:id', (req, res) => {
 
   axios.get(`https://api.mercadolibre.com/items/${req.params.id}`)
     .then(function ({ data }) {
-
-      // const categoryValues = filters.find(filter => filter.id === 'category')?.values[0]
-      // const categories = categoryValues?.path_from_root.map(path => path.name) || []
-      
       item = {
         id: data.id,
         title: data.title,
