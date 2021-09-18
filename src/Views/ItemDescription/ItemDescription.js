@@ -1,13 +1,15 @@
-import useAxios from '../../customHooks/useAxios'
 import { useParams } from 'react-router'
-import { ItemDescriptionStyle } from './ItemDescriptionStyle'
+import useAxios from '../../customHooks/useAxios'
+import ItemBreadcrumbs from './ItemBreadcrumbs'
 import Button from '../../atoms/Button'
+import { ItemDescriptionStyle } from './ItemDescriptionStyle'
+import { NumberFormat } from '../../utils/NumberFormat'
 
 const ItemDescription = () => {
   let { id } = useParams()
 
-  // eslint-disable-next-line no-unused-vars
   const { data, loading, error } = useAxios({
+    method: 'get',
     url: `/api/items/${id}`,
   })
 
@@ -23,6 +25,9 @@ const ItemDescription = () => {
     <ItemDescriptionStyle 
       backgroundUrl={data.item.picture}
     >
+      <ItemBreadcrumbs 
+        categoryId={data.item.category_id}
+      />
       <div>
         <div className="item-description-picture" />
         <div className="item-description">
@@ -30,19 +35,19 @@ const ItemDescription = () => {
           <p>{data.item.description}</p>
         </div>
       </div>
-      <div>
+      <div className="item-description-buy-section">
         <p className="sold-quantity">
-          {data.item.condition === 'new' && 'Nuevo -'}
-          {' '}
+          {data.item.condition === 'new' && 'Nuevo'}
+          {(data.item.condition === 'new' && data.item.sold_quantity > 0) && ' - '}
           {data.item.sold_quantity > 0 && `${data.item.sold_quantity} vendidos`} 
         </p>
         <h2 className="item-description-title">
           {data.item.title}
         </h2>
         <h2 className="item-description-price">
-          $ {data.item.price.amount}
+          $ {NumberFormat.format(data.item.price.amount)}
           <span>
-            {data.item.price.decimals}
+            {data.item.price.decimals || '00'}
           </span>
         </h2>
         <Button variant="primary">

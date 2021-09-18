@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
 import { ButtonStyle } from './ButtonStyle'
 
-const Button = ({ children, ...props }) => {
+const Button = ({ children, variant, ...props }) => {
   return (
-    <ButtonStyle
-      {...props}
+    <ButtonStyle {...props}
+      data-testid="Atom_button"
+      variant={variant}
     >
       {children}
     </ButtonStyle>
@@ -12,7 +13,8 @@ const Button = ({ children, ...props }) => {
 }
 
 Button.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  variant: PropTypes.string
 }
 
 export default Button

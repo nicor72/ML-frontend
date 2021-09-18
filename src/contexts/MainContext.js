@@ -15,6 +15,11 @@ const MainProvider = ({ children }) => {
         ...state,
         breadcrumbs: action.payload
       }
+    case 'CLEAR_BREADCRUMBS':
+      return {
+        ...state,
+        breadcrumbs: []
+      }
     default:
       return state
     }

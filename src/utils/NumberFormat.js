@@ -1,0 +1,1 @@
+export const NumberFormat = new Intl.NumberFormat('de-DE')

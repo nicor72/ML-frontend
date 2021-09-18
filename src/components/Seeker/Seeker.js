@@ -18,12 +18,14 @@ const Seeker = () => {
       <form onSubmit={(e) => handleSubmit(e)}>
         <input
           id="Seeker_input"
+          data-testid="Seeker_input"
           placeholder="Nunca dejes de buscar"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
         <button
           id="Seeker_submit"
+          data-testid="Seeker_submit"
           type="submit"
         >
           lupa

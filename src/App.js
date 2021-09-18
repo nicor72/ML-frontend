@@ -21,7 +21,6 @@ function App() {
               <ItemsList />
             </Route>
             <Route exact path="/">
-              Inicio
             </Route>
           </MainLayout>
         </MainProvider>

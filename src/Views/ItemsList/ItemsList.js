@@ -3,16 +3,19 @@ import { useLocation, Link } from 'react-router-dom'
 import useAxios from '../../customHooks/useAxios'
 import ItemBox from './ItemBox'
 import { MainContext } from '../../contexts/MainContext'
-import { ItemsBoxStyle } from './ItemsBoxStyle'
+import { ItemBoxStyle } from './ItemBoxStyle'
+import { ItemsListStyle } from './ItemsListStyle'
 import { useEffect } from 'react'
 
 const ItemsList = () => {
   const { dispatch } = useContext(MainContext)
   
+  const QUERY_LIMIT = '&limit=4'
   let query = new URLSearchParams(useLocation().search)
 
   const { data, loading, error } = useAxios({
-    url: `/api/items?q=${query.get('search')}`,
+    method: 'get',
+    url: `/api/items?q=${query.get('search')}${QUERY_LIMIT}`,
   }) 
 
   useEffect(() => {
@@ -30,9 +33,9 @@ const ItemsList = () => {
   }
 
   return(
-    <>
+    <ItemsListStyle data-testid="Items_list">
       {data.items.map((item, key, items) => 
-        <ItemsBoxStyle 
+        <ItemBoxStyle 
           key={item.id}
           backgroundUrl={item.picture || ''}
         >
@@ -42,9 +45,9 @@ const ItemsList = () => {
             />
           </Link>
           {key < items.length -1 && <hr />}
-        </ItemsBoxStyle>
+        </ItemBoxStyle>
       )}
-    </>
+    </ItemsListStyle>
   )
 }
 
