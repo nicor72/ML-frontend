@@ -17,12 +17,12 @@ const MainLayout = ({ children }) => {
   }, [location])
 
   return (
-    <MainLayoutStyle>
+    <MainLayoutStyle className="main-layout">
       <Header />
       <Breadcrumbs 
         path={state.breadcrumbs}
       />
-      <div data-testid="Content_container" className="content-container">
+      <div data-testid="Content_container" className="main-layout__container">
         {children}
       </div>
     </MainLayoutStyle>

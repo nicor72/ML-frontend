@@ -9,7 +9,7 @@ export const BreadcrumbsStyle = styled.div`
   }
 
   li {
-    color: #565770;
+    color: ${props => props.theme.secondary};
     padding: 4px;
   }
 

@@ -29,21 +29,21 @@ router.get('/api/items', (req, res) => {
         const categoryValues = filters.find(filter => filter.id === 'category')?.values[0]
         categories = categoryValues?.path_from_root.map(path => path.name) || []
         
-        for (let i = 0; i < results.length; i++) {
-          items.push({
-            id: results[i].id,
-            title: results[i].title,
-            price: {
-              currency: results[i].currency_id,
-              amount: results[i].price.toString().split('.')[0],
-              decimals: results[i].price.toString().split('.')[1]
-            },
-            picture: results[i].thumbnail,
-            condition: results[i].condition,
-            free_shipping: results[i].shipping.free_shipping,
-            location: results[i].address.city_name
-          })
-        }
+        // for (let i = 0; i < results.length; i++) {
+        items = results.map(item => ({
+          id: item.id,
+          title: item.title,
+          price: {
+            currency: item.currency_id,
+            amount: item.price.toString().split('.')[0],
+            decimals: item.price.toString().split('.')[1]
+          },
+          picture: item.thumbnail,
+          condition: item.condition,
+          free_shipping: item.shipping.free_shipping,
+          location: item.address.city_name
+        }))
+        // }
       }
 
       res.send({
@@ -54,7 +54,6 @@ router.get('/api/items', (req, res) => {
       })
     })
     .catch(function (error) {
-      console.log(error.message)
       res.status(500).send({ message: error.message })
     })
 })
@@ -69,11 +68,12 @@ router.get('/api/items/:id', (req, res) => {
     })
   }
   
-  let item = {}
+  let item = { description: '' }
 
   axios.get(`${API_URL}/items/${req.params.id}`)
     .then(function ({ data }) {
       item = {
+        ...item,
         id: data.id,
         title: data.title,
         price: {
@@ -134,7 +134,6 @@ router.get('/api/categories/:id', (req, res) => {
       })
     })
     .catch(function (error) {
-      console.log(error.message)
       res.status(500).send({ message: error.message })
     })
 })

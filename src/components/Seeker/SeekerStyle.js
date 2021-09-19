@@ -1,14 +1,14 @@
 import styled  from 'styled-components'
 
 export const SeekerStyle = styled.div`
-  #Seeker_input {
+  .seeker__input {
     width: 50vw;
     height: 28px;
     border: none;
     padding: 4px;
   }
 
-  #Seeker_submit {
+  .seeker__submit {
     height: 36px;
     padding: 4px;
     border: none;

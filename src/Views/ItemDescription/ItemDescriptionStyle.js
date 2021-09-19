@@ -6,7 +6,7 @@ export const ItemDescriptionStyle = styled.div`
   justify-content: flex-start;
   padding: 18px;
 
-  .item-description-picture {
+  .item-description__picture {
     background: ${props => `url(${props.backgroundUrl})`};
     background-size: contain;
     background-repeat: no-repeat;
@@ -15,32 +15,32 @@ export const ItemDescriptionStyle = styled.div`
     height: 600px;
   }
 
-  .item-description {
+  .item-description__description {
     width: 50vw;
-    color: #565770;
+    color: ${props => props.theme.secondary};
     margin-top: 48px;
   }
 
-  .item-description-buy-section {
+  .buy-section {
     padding: 0 16px;
   }
 
-  .item-description-title {
+  .buy-section__title {
     margin-top: 4px;
   }
 
-  .item-description-price {
+  .buy-section__price {
     font-size: 42px;
     margin-top: 0;
   }
 
-  .sold-quantity {
+  .buy-section__sold-quantity {
     margin-bottom: 0;
-    color: #565770;
+    color: ${props => props.theme.secondary};
   }
 
-  span {
-    color: #565770;
+  .buy-section__decimals {
+    color: ${props => props.theme.secondary};
     font-size: 18px;
     position: relative;
     bottom: 18px;
@@ -49,11 +49,11 @@ export const ItemDescriptionStyle = styled.div`
   @media (max-width: 768px) {
     display: block;
 
-    .item-description-picture {
+    .item-description__picture {
       height: 250px;
     }
 
-    .item-description {
+    .item-description__description {
       width: 100%;
     }
   }

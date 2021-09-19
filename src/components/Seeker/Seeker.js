@@ -8,6 +8,7 @@ const Seeker = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
     if (inputValue.trim()) {
       history.push(`/items?search=${inputValue.trim()}`)
     }
@@ -15,17 +16,20 @@ const Seeker = () => {
 
   return (
     <SeekerStyle>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form 
+        className="seeker"
+        onSubmit={(e) => handleSubmit(e)}
+      >
         <input
-          id="Seeker_input"
           data-testid="Seeker_input"
+          className="seeker__input"
           placeholder="Nunca dejes de buscar"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
         <button
-          id="Seeker_submit"
           data-testid="Seeker_submit"
+          className="seeker__submit"
           type="submit"
         >
           lupa

@@ -20,11 +20,11 @@ export const ItemBoxStyle = styled.div`
     align-items: center;
   }
 
-  .item-main-details {
+  .item-box__main-details {
     display: flex  
   }
 
-  .item-picture {
+  .item-box__picture {
     background: ${props => `url(${props.backgroundUrl})`};
     background-size: contain;
     background-repeat: no-repeat;
@@ -34,7 +34,7 @@ export const ItemBoxStyle = styled.div`
     margin: 0 16px;
   }
 
-  .item-new-span {
+  .item-title__title__new-span {
     height: 18px;
     width: 18px;
     background-color: green;
@@ -43,23 +43,23 @@ export const ItemBoxStyle = styled.div`
     margin: 0 8px;
   }
 
-  .item-location {
+  .item-box__location {
     margin: 0 32px 80px;
-    color: #565770;
+    color: ${props => props.theme.secondary};
   }
 
   @media (max-width: 425px) {
     font-size: small;
 
-    .item-title-section {
+    .item-title__title {
       max-width: 200px;
     }
 
-    .item-picture {
+    .item-box__picture {
       width: 100px;
     }
 
-    .item-location {
+    .item-box__location {
       display: none;
     }
   }
