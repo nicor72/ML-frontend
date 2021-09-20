@@ -17,7 +17,7 @@ export const ItemDescriptionStyle = styled.div`
 
   .item-description__description {
     width: 50vw;
-    color: ${props => props.theme.secondary};
+    color: ${({ theme }) => theme.text.secondary.color};
     margin-top: 48px;
   }
 
@@ -36,11 +36,11 @@ export const ItemDescriptionStyle = styled.div`
 
   .buy-section__sold-quantity {
     margin-bottom: 0;
-    color: ${props => props.theme.secondary};
+    color: ${({ theme }) => theme.text.secondary.color};
   }
 
   .buy-section__decimals {
-    color: ${props => props.theme.secondary};
+    color: ${({ theme }) => theme.text.secondary.color};
     font-size: 18px;
     position: relative;
     bottom: 18px;

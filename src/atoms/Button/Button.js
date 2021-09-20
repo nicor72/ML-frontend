@@ -5,7 +5,7 @@ const Button = ({ children, variant, ...props }) => {
   return (
     <ButtonStyle {...props}
       data-testid="Atom_button"
-      variant={variant}
+      modifiers={variant}
     >
       {children}
     </ButtonStyle>

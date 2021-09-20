@@ -4,11 +4,11 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { ThemeProvider } from 'styled-components'
-import { Maintheme } from './themes/MainTheme'
+import { MainTheme } from './themes/MainTheme'
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={Maintheme}>
+    <ThemeProvider theme={MainTheme}>
       <App />
     </ThemeProvider>
   </React.StrictMode>,

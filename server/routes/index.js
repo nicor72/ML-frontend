@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const express = require('express')
 const axios = require('axios') 
 const { API_URL, AUTHOR } = require('../constants')
@@ -29,7 +28,6 @@ router.get('/api/items', (req, res) => {
         const categoryValues = filters.find(filter => filter.id === 'category')?.values[0]
         categories = categoryValues?.path_from_root.map(path => path.name) || []
         
-        // for (let i = 0; i < results.length; i++) {
         items = results.map(item => ({
           id: item.id,
           title: item.title,
@@ -43,7 +41,6 @@ router.get('/api/items', (req, res) => {
           free_shipping: item.shipping.free_shipping,
           location: item.address.city_name
         }))
-        // }
       }
 
       res.send({

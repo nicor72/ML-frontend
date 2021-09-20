@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { render, waitFor, screen, act, fireEvent } from '@testing-library/react'
+import { ThemeProvider } from 'styled-components'
+import { MainTheme } from '../../themes/MainTheme'
 import { MainProvider } from '../../contexts/MainContext'
 import ItemsList from './ItemsList'
 
@@ -20,18 +22,20 @@ const data = {
 }
 
 const renderItemsList = () => render(
-  <BrowserRouter>
-    <MainProvider>
-      <ItemsList />
-      <Route
-        path="*"
-        render={({ location }) => {
-          testLocation = location
-          return null
-        }}
-      />
-    </MainProvider>
-  </BrowserRouter>
+  <ThemeProvider theme={MainTheme}>
+    <BrowserRouter>
+      <MainProvider>
+        <ItemsList />
+        <Route
+          path="*"
+          render={({ location }) => {
+            testLocation = location
+            return null
+          }}
+        />
+      </MainProvider>
+    </BrowserRouter>
+  </ThemeProvider>
 )
 
 test('render one item in items list', async() => {

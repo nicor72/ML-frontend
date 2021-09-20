@@ -1,4 +1,6 @@
 import { render, screen } from '@testing-library/react'
+import { ThemeProvider } from 'styled-components'
+import { MainTheme } from '../../themes/MainTheme'
 import Button from './Button'
 import 'jest-styled-components'
 
@@ -6,7 +8,9 @@ test('button renders with child', () => {
   const child = 'Test Button'
 
   render(
-    <Button>{child}</Button>
+    <ThemeProvider theme={MainTheme}>
+      <Button>{child}</Button>
+    </ThemeProvider>
   )
 
   const button = screen.getByText(child)
@@ -14,7 +18,11 @@ test('button renders with child', () => {
 })
 
 test('button renders without child', () => {
-  render(<Button />)
+  render(
+    <ThemeProvider theme={MainTheme}>
+      <Button />
+    </ThemeProvider>
+  )
 
   const button = screen.getByTestId('Atom_button')
   expect(button).toBeInTheDocument()
@@ -22,7 +30,9 @@ test('button renders without child', () => {
 
 test('button primary renders', () => {
   render(
-    <Button variant="primary">Primary</Button>
+    <ThemeProvider theme={MainTheme}>
+      <Button variant="primary">Primary</Button>
+    </ThemeProvider>
   )
 
   const button = screen.getByText('Primary')
@@ -30,12 +40,14 @@ test('button primary renders', () => {
   expect(button).toHaveStyleRule('background-color', '#3483fa')
 })
 
-test('button not primary renders', () => {
+test('renders button without variant', () => {
   render(
-    <Button>Not Primary</Button>
+    <ThemeProvider theme={MainTheme}>
+      <Button>Not Primary</Button>
+    </ThemeProvider>
   )
 
   const button = screen.getByText('Not Primary')
-  expect(button).toHaveStyleRule('color', '#3483fa')
-  expect(button).toHaveStyleRule('background-color', '#DBE8FA')
+  expect(button).toHaveStyleRule('color', undefined)
+  expect(button).toHaveStyleRule('background-color', undefined)
 })
