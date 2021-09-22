@@ -23,7 +23,7 @@ const data = {
 
 const renderItemsList = () => render(
   <ThemeProvider theme={MainTheme}>
-    <BrowserRouter>
+    <BrowserRouter initialEntries={['/items/?search=milk']}>
       <MainProvider>
         <ItemsList />
         <Route
@@ -88,7 +88,7 @@ test('empty list', async() => {
   renderItemsList()
 
   await waitFor(() => {
-    const itemsList = screen.getByTestId('Items_list')
+    const itemsList = screen.getByText('No se encontraron resultados')
     expect(itemsList).toBeInTheDocument()
 
     const itemsBoxes = screen.queryAllByTestId('Item_box')
@@ -97,7 +97,10 @@ test('empty list', async() => {
 })
 
 test('renders error', async() => {
-  axios.get.mockRejectedValueOnce(new Error(''))
+  axios.get.mockRejectedValueOnce({ 
+    response: { status: 500 }, 
+    message: 'internal error'
+  })
     
   renderItemsList()
 

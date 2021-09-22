@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { applyStyleModifiers } from 'styled-components-modifiers'
 
-const MODIFIER_CONFIG = {
+const BUTTON_MODIFIER = {
   primary: ({ theme }) => `
     color: ${theme.button.primary.color};
     background-color: ${theme.button.primary.backgroundColor};
@@ -22,5 +22,5 @@ export const ButtonStyle = styled.button`
   line-height: 48px;
   cursor: pointer;
 
-  ${applyStyleModifiers(MODIFIER_CONFIG)}
+  ${applyStyleModifiers(BUTTON_MODIFIER)}
 `

@@ -9,6 +9,12 @@ const useAxios = ({ url, method, body = null, headers = null }) => {
   const [error, setError] = useState('')
   const [loading, setloading] = useState(true)
 
+  const resetRequest = () => {
+    setData(null)
+    setError('')
+    setloading(true)
+  }
+
   const fetchData = () => {
     axios[method](url, JSON.parse(headers), JSON.parse(body))
       .then((res) => {
@@ -23,6 +29,7 @@ const useAxios = ({ url, method, body = null, headers = null }) => {
   }
 
   useEffect(() => {
+    resetRequest()
     fetchData()
   }, [method, url, body, headers])
 

@@ -1,21 +1,22 @@
-import { useContext } from 'react'
+import { useEffect, useContext } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import useAxios from '../../customHooks/useAxios'
 import ItemBox from './ItemBox'
+import ErrorComponent from '../../components/ErrorComponent'
 import { MainContext } from '../../contexts/MainContext'
 import { ItemBoxStyle } from './ItemBoxStyle'
 import { ItemsListStyle } from './ItemsListStyle'
-import { useEffect } from 'react'
 
 const ItemsList = () => {
   const { dispatch } = useContext(MainContext)
   
   const QUERY_LIMIT = '&limit=4'
   let query = new URLSearchParams(useLocation().search)
+  query = query.get('search')?.replace(/[|&;$%@"<>()+,·¨ÇñÑ´]/g, '') || ''
 
   const { data, loading, error } = useAxios({
     method: 'get',
-    url: `/api/items?q=${query.get('search')}${QUERY_LIMIT}`,
+    url: `/api/items?q=${query}${QUERY_LIMIT}`,
   }) 
 
   useEffect(() => {
@@ -25,11 +26,15 @@ const ItemsList = () => {
   }, [data])
 
   if (error) {
-    return <div>Opss, Error :( {error.message}</div>
+    return <ErrorComponent error={error} />
   }
 
   if (loading) {
     return <div>Cargando...</div>
+  }
+  
+  if (!data?.items.length) {
+    return <div>No se encontraron resultados</div>
   }
 
   return(

@@ -10,7 +10,9 @@ export const SeekerStyle = styled.div`
 
   .seeker__submit {
     height: 36px;
-    padding: 4px;
+    padding: 4px 8px;
     border: none;
+    cursor: pointer;
+    vertical-align: middle;
   }
 `

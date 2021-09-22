@@ -57,12 +57,29 @@ test('render item description', async() => {
 })
 
 test('renders error', async() => {
-  axios.get.mockRejectedValueOnce(new Error(''))
+  axios.get.mockRejectedValueOnce({  
+    response: { status: 500 }, 
+    message: 'internal error'
+  })
     
   renderItemsList()
 
   await waitFor(() => {
     const error = screen.getByText(/Error/i)
+    expect(error).toBeInTheDocument()
+  })
+})
+
+test('renders not found', async() => {
+  axios.get.mockRejectedValueOnce({  
+    response: { status: 404 }, 
+    message: 'not found'
+  })
+    
+  renderItemsList()
+
+  await waitFor(() => {
+    const error = screen.getByText(/Página no encontrada/i)
     expect(error).toBeInTheDocument()
   })
 })

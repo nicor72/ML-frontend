@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { AiOutlineSearch } from 'react-icons/ai'
 import { SeekerStyle } from './SeekerStyle'
 
 const Seeker = () => {
@@ -32,7 +33,7 @@ const Seeker = () => {
           className="seeker__submit"
           type="submit"
         >
-          lupa
+          <AiOutlineSearch size={16} />
         </button>
       </form>
     </SeekerStyle>

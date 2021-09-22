@@ -1,6 +1,7 @@
 import { useParams } from 'react-router'
 import useAxios from '../../customHooks/useAxios'
 import ItemBreadcrumbs from './ItemBreadcrumbs'
+import ErrorComponent from '../../components/ErrorComponent'
 import Button from '../../atoms/Button'
 import { ItemDescriptionStyle } from './ItemDescriptionStyle'
 import { NumberFormat } from '../../utils/NumberFormat'
@@ -14,7 +15,7 @@ const ItemDescription = () => {
   })
 
   if (error) {
-    return <div>Opss, Error :( {error.message}</div>
+    return <ErrorComponent error={error} />
   }
 
   if (loading) {
