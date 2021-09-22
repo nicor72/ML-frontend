@@ -2,49 +2,42 @@ const axios = require('axios')
 const { API_URL, AUTHOR } = require('../../constants')
 
 module.exports = {
-  getItem: (req, res) => {
-    res.header('Access-Control-Allow-Origin', '*')
-
+  getItem: async (req, res) => {
     if (!req.params.id) {
-      res.status(404).send({ message: 'Missing param' })
+      res.status(400).send({ message: 'Missing param' })
     }
-  
-    let item = { description: '' }
 
-    axios.get(`${API_URL}/items/${req.params.id}`)
-      .then(function ({ data }) {
-        item = {
-          ...item,
-          id: data.id,
-          title: data.title,
-          price: {
-            currency: data.currency_id,
-            amount: data.price.toString().split('.')[0],
-            decimals: data.price.toString().split('.')[1]
-          },
-          picture: data.thumbnail,
-          condition: data.condition,
-          free_shipping: data.shipping.free_shipping,
-          sold_quantity: data.sold_quantity,
-          category_id: data.category_id
-        }
+    try {
+      let item = { description: '' }
+
+      const { data } = await axios.get(`${API_URL}/items/${req.params.id}`)
+
+      item = {
+        ...item,
+        id: data.id,
+        title: data.title,
+        price: {
+          currency: data.currency_id,
+          amount: data.price?.toString().split('.')[0] || '',
+          decimals: data.price?.toString().split('.')[1] || ''
+        },
+        picture: data.thumbnail,
+        condition: data.condition,
+        free_shipping: data.shipping?.free_shipping || false,
+        sold_quantity: data.sold_quantity,
+        category_id: data.category_id
+      }
+
+      const descriptionData = await axios.get(`${API_URL}/items/${req.params.id}/description`)
+
+      item.description = descriptionData.data.plain_text
+            
+      res.send({
+        author: AUTHOR,
+        item
       })
-      .catch(function (error) {
-        res.status(error.response.status).send({ message: error.message })
-      })
-      .then(function () {
-        axios.get(`${API_URL}/items/${req.params.id}/description`)
-          .then(function ({ data }) {
-            item.description = data.plain_text
-          
-            res.send({
-              author: AUTHOR,
-              item
-            })
-          })
-          .catch(function (error) {
-            res.status(error.response.status).send({ message: error.message })
-          })
-      })
+    } catch (error) {
+      res.status(error.response?.status ||500).send({ message: error.message })
+    }
   }
 }

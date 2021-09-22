@@ -2,29 +2,26 @@ const axios = require('axios')
 const { API_URL, AUTHOR } = require('../../constants')
 
 module.exports = {
-  getCategory: (req, res) => {
-    res.header('Access-Control-Allow-Origin', '*')
-  
+  getCategory: async (req, res) => {
     if (!req.params.id) {
-      res.status(404).send({ message: 'Missing param' })
+      res.status(400).send({ message: 'Missing param' })
     }
 
-    let categories = []
+    try {
+      let categories = []
 
-    axios.get(`${API_URL}/categories/${req.params.id}`)
-      .then(function ({ data }) {
+      const { data } = await axios.get(`${API_URL}/categories/${req.params.id}`)
 
-        if (data) {
-          categories = data.path_from_root.map(path => path.name)
-        }
+      if (data) {
+        categories = data.path_from_root.map(path => path.name)
+      }
 
-        res.send({
-          author: AUTHOR,
-          categories
-        })
+      res.send({
+        author: AUTHOR,
+        categories
       })
-      .catch(function (error) {
-        res.status(error.response.status).send({ message: error.message })
-      })
+    } catch (error) {
+      res.status(error.response?.status ||500).send({ message: error.message })
+    }
   }
 }
