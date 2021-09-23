@@ -3,6 +3,11 @@ import { useHistory } from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { SeekerStyle } from './SeekerStyle'
 
+/**
+* Renders a Search Input
+* 
+* Call to items search only if is have a value
+*/
 const Seeker = () => {
   let history = useHistory()
   const [inputValue, setInputValue] = useState('')

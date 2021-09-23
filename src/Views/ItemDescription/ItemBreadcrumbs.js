@@ -2,6 +2,11 @@ import { useEffect, useContext } from 'react'
 import useAxios from '../../customHooks/useAxios'
 import { MainContext } from '../../contexts/MainContext'
 
+/**
+* Component for fill breadcrumbs with the path of the product's category
+* 
+* @returns null - not renders elements
+*/
 const ItemBreadcrumbs = ({ categoryId }) => {
   const { dispatch } = useContext(MainContext)
 

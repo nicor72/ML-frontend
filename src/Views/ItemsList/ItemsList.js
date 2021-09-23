@@ -7,6 +7,9 @@ import { MainContext } from '../../contexts/MainContext'
 import { ItemBoxStyle } from './ItemBoxStyle'
 import { ItemsListStyle } from './ItemsListStyle'
 
+/**
+* Renders a list of items with the api response
+*/
 const ItemsList = () => {
   const { dispatch } = useContext(MainContext)
   

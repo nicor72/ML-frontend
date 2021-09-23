@@ -1,7 +1,12 @@
 import PropTypes from 'prop-types'
 import { NumberFormat } from '../../utils/NumberFormat'
 
-const ItemBox = ({ item = [] }) => {
+/**
+* Renders a Item Box inside de ItemsList
+* 
+* @param item - object with the item info to render
+*/
+const ItemBox = ({ item }) => {
   return (
     <div data-testid="Item_box" className="item-box">
       <div className="item-box__main-details">
@@ -32,7 +37,7 @@ ItemBox.propTypes = {
       amount: PropTypes.string
     }),
     picture: PropTypes.string
-  })
+  }).isRequired
 }
 
 export default ItemBox

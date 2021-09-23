@@ -1,6 +1,11 @@
 const axios = require('axios')
 const { API_URL, AUTHOR } = require('../../constants')
 
+/**
+* Search items
+* 
+* @returns object with items and categories
+*/
 module.exports = {
   searchItem: async (req, res) => {
     if (!req.query.q) {

@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types'
 
+/**
+* Renders an Error depending on status code
+* 
+* @param error - Object with te error response
+*/
 const ErrorComponent = ({ error }) => {
-  
   const renderError = (status) => {
     switch (status) {
     case 404:

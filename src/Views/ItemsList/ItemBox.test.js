@@ -45,12 +45,12 @@ test('render item box with empty item', async() => {
   expect(itemBox).toBeInTheDocument()
 })
 
-test('render item box without passing prop', async() => {
+test('render item box with empty item', async() => {
     
   render(
     <BrowserRouter>
       <MainProvider>
-        <ItemBox />
+        <ItemBox item={{}}/>
       </MainProvider>
     </BrowserRouter>
   )

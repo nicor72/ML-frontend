@@ -2,6 +2,9 @@ import Seeker from '../Seeker'
 import { Link } from 'react-router-dom'
 import { HeaderStyle } from './HeaderStyle'
 
+/**
+* Renders a Header component
+*/
 const Header = () => {
   return (
     <HeaderStyle>

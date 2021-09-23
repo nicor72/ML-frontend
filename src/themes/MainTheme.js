@@ -1,3 +1,6 @@
+/**
+* Main theme with primitives styles
+*/
 export const MainTheme = {
   button: {
     primary: {

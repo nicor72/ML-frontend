@@ -2,6 +2,11 @@ import PropTypes from 'prop-types'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import { BreadcrumbsStyle } from './BreadcrumbsStyle'
 
+/**
+* Renders a Breadcrumbs component with the elements of the path
+* 
+* @param path - array of strings
+*/
 const Breadcrumbs = ({ path = [] }) => {
   const location = useLocation()
   const history = useHistory()
@@ -26,7 +31,7 @@ const Breadcrumbs = ({ path = [] }) => {
 }
 
 Breadcrumbs.propTypes = {
-  path: PropTypes.array
+  path: PropTypes.arrayOf(PropTypes.string)
 }
 
 export default Breadcrumbs

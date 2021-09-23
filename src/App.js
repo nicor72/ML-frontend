@@ -9,6 +9,11 @@ import ItemDescription from './views/ItemDescription'
 import ItemsList from './views/ItemsList'
 import { MainProvider } from './contexts/MainContext'
 
+/**
+* Main Component
+* 
+* Handles routes
+*/
 function App() {
   return (
     <Router>

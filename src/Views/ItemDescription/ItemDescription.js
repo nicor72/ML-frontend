@@ -6,6 +6,9 @@ import Button from '../../atoms/Button'
 import { ItemDescriptionStyle } from './ItemDescriptionStyle'
 import { NumberFormat } from '../../utils/NumberFormat'
 
+/**
+* Renders a Item Description with the api response
+*/
 const ItemDescription = () => {
   let { id } = useParams()
 

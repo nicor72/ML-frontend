@@ -1,6 +1,11 @@
 const axios = require('axios')
 const { API_URL, AUTHOR } = require('../../constants')
 
+/**
+* Call to items/:id endpoint
+* 
+* @returns object with single item
+*/
 module.exports = {
   getItem: async (req, res) => {
     if (!req.params.id) {
@@ -21,7 +26,7 @@ module.exports = {
           amount: data.price?.toString().split('.')[0] || '',
           decimals: data.price?.toString().split('.')[1] || ''
         },
-        picture: data.thumbnail,
+        picture: data.pictures[0].url,
         condition: data.condition,
         free_shipping: data.shipping?.free_shipping || false,
         sold_quantity: data.sold_quantity,
@@ -37,7 +42,7 @@ module.exports = {
         item
       })
     } catch (error) {
-      res.status(error.response?.status ||500).send({ message: error.message })
+      res.status(error.response?.status || 500).send({ message: error.message })
     }
   }
 }

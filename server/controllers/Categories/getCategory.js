@@ -1,6 +1,11 @@
 const axios = require('axios')
 const { API_URL, AUTHOR } = require('../../constants')
 
+/**
+* Call to categories/:id endpoint
+* 
+* @returns array with the path_from_root of the category
+*/
 module.exports = {
   getCategory: async (req, res) => {
     if (!req.params.id) {
@@ -21,7 +26,7 @@ module.exports = {
         categories
       })
     } catch (error) {
-      res.status(error.response?.status ||500).send({ message: error.message })
+      res.status(error.response?.status || 500).send({ message: error.message })
     }
   }
 }

@@ -17,7 +17,7 @@ test('return item', async () => {
       title: 'Bajo Electrico',
       currency_id: 'ARS',
       price: 1300.50,
-      thumbnail: '',
+      pictures: [{ url: '' }],
       condition: 'new',
       shipping: {
         free_shipping: false,

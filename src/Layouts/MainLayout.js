@@ -6,6 +6,9 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import { MainContext } from '../contexts/MainContext'
 import { MainLayoutStyle } from './MainLayoutStyle'
 
+/**
+* Layout with header and breadcrumbs components
+*/
 const MainLayout = ({ children }) => {
   let location = useLocation()
   const { state, dispatch } = useContext(MainContext)

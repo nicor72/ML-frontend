@@ -4,6 +4,11 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:4000'
 
+/**
+* Hook to fetch data with axios
+* 
+* @returns request states (data, loading, error)
+*/
 const useAxios = ({ url, method, body = null, headers = null }) => {
   const [data, setData] = useState(null)
   const [error, setError] = useState('')
