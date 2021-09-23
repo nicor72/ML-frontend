@@ -11,11 +11,14 @@ const initialState = {
 
 /**
 * Main context of the app
+*/
+export const MainContext = createContext()
+
+/**
+* Main Provider of the app
 * 
 * includes a reducer to handle state changes
 */
-export const MainContext = createContext(initialState)
-
 const MainProvider = ({ children }) => {
   const [state, dispatch] = useReducer(
     produce((draft, action) => {
