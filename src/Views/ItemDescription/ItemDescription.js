@@ -55,7 +55,10 @@ const ItemDescription = () => {
             {data.item.price.decimals || '00'}
           </span>
         </h2>
-        <Button variant="primary">
+        <Button 
+          type="button"
+          variant="primary"
+        >
           Comprar
         </Button>
       </div>
