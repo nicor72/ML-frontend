@@ -16,7 +16,7 @@ const ErrorComponent = ({ error }) => {
   }
 
   return (
-    <div>{renderError(error.response.status)}</div>
+    <div>{renderError(error.response?.status)}</div>
   )
 }
 
@@ -24,9 +24,9 @@ ErrorComponent.propTypes = {
   error: PropTypes.shape({
     message: PropTypes.string.isRequired,
     response: PropTypes.shape({
-      status: PropTypes.number.isRequired
-    }).isRequired
-  })
+      status: PropTypes.number
+    })
+  }).isRequired
 }
 
 export default ErrorComponent
